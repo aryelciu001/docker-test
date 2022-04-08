@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  server:
+    container_name: server
+    image: node:17-alpine
+    ports:
+      - "3001:3001"
+    working_dir: /app/server
+    volumes:
+      - ./server:/app/server
+    command: sh -c "npm install && npm start"
+    networks:
+      - local
+  client:
+    container_name: client
+    image: node:17-alpine
+    ports:
+      - "3000:3000"
+    working_dir: /app/client
+    volumes:
+      - ./client:/app/client
+    command: sh -c "npm install && npm start"
+    networks:
+      - local
+networks:
+  local:
